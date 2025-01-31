@@ -1,88 +1,93 @@
-const fetch = require('node-fetch');
-const fs = require('fs');
-const path = require('path');
+const fetch = require("node-fetch");
+let handler = async (m, { hanz }) => {
+  const fs = require("fs");
+  const path = require("path");
 
-const handler = async(m, { conn, text,setReply }) => {
-  // Path ke folder plugins
-  const pluginsFolderPath = './plugins';
-
-  // Daftar folder yang ingin dikecualikan dari perhitungan
-  const excludedFolders = ['Bot-function', 'Game-answer', 'Game-hint', 'Case']; // Ganti dengan nama folder yang ingin dikecualikan
-
-  // Fungsi untuk menghitung jumlah file.js dalam sebuah folder
-  function countJSFiles(folderPath) {
+  const pluginsFolderPath = "./plugins";
+  const excludedFolders = [];
+  function getFolderDetails(folderPath) {
     try {
-      const files = fs.readdirSync(folderPath); // Baca isi folder secara sinkron
-      let jsFileCount = 0;
+      const items = fs.readdirSync(folderPath);
+      let details = [];
 
-      files.forEach((file) => {
-        const filePath = path.join(folderPath, file);
-        const stat = fs.statSync(filePath); // Dapatkan informasi status file
+      items.forEach((item) => {
+        const itemPath = path.join(folderPath, item);
+        const stat = fs.statSync(itemPath);
 
-        if (stat.isDirectory()) {
-          if (!excludedFolders.includes(file)) {
-            jsFileCount += countJSFiles(filePath); // Rekursif untuk folder dalam folder
-          }
-        } else {
-          if (path.extname(file) === '.js') {
-            jsFileCount++; // Tambahkan 1 untuk setiap file.js
-          }
+        if (stat.isDirectory() && !excludedFolders.includes(item)) {
+          const jsFileCount = fs
+            .readdirSync(itemPath)
+            .filter((file) => path.extname(file) === ".js").length;
+
+          details.push({ folder: item, files: jsFileCount });
         }
       });
 
-      return jsFileCount;
+      return details;
     } catch (error) {
-      console.error('Error:', error);
-      return 0; // Jika terjadi error, kembalikan nilai 0
+      console.error("Error:", error);
+      return [];
     }
   }
-
-  // Hitung jumlah file.js dalam semua folder di dalam folder plugins
-  const totalJSFiles = countJSFiles(pluginsFolderPath);
-
+ 
+  const folderDetails = getFolderDetails(pluginsFolderPath);
+  const totalJSFiles = folderDetails.reduce((sum, detail) => sum + detail.files, 0);
   const totalFitur = () => {
     try {
-      const mytext = fs.readFileSync('./message/case.js', 'utf8');
-      const numCases = (mytext.match(/(?<!\/\/)(case\s+['"][^'"]+['"])/g) || [])
-        .length;
-      return numCases;
+      const mytext = fs.readFileSync("./message/case.js", "utf8");
+      return (mytext.match(/(?<!\/\/)(case\s+['"][^'"]+['"])/g) || []).length;
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       return 0;
     }
   };
 
-  const img = 'https://telegra.ph/file/59a2583b604f3cb255cb4.jpg';
- // const copyright = 'Your Copyright Here'; // Ganti dengan nilai yang sesuai
-//  const calender = 'Your Calendar Here'; // Ganti dengan nilai yang sesuai
+  const totalCases = totalFitur();
+  const img = "https://telegra.ph/file/59a2583b604f3cb255cb4.jpg";
+  const currentYear = new Date().getFullYear();
+  const totalFeatures = totalJSFiles + totalCases;
+  let teks = `––––––『 *TOTAL FEATURE* 』––––––\n\n`;
 
-  const teks = `––––––『 *TOTAL FEATURE* 』––––––
+  teks += `📂 *Plugins*\n`;
+  folderDetails.forEach((detail) => {
+    teks += `- Folder: ${detail.folder}\n  File: ${detail.files} file.js\n`;
+  });
 
-  • Plugins : ${totalJSFiles}
-  • Cases : ${totalFitur()}
+  teks += `\n📌 *Case*\n`;
+  teks += `- Total Case: ${totalCases}\n`;
 
-  Total: ${totalFitur() + totalJSFiles} feature
-
-  ${copyright} - ${calender}`;
-
-  setReply(teks)
-
-  const contextInfo = {
-    externalAdReply: {
-      showAdAttribution: true,
-      mediaType: 1,
-      title: copyright,
-      mediaUrl: img,
-      thumbnailUrl: img,
-      sourceId: ' ',
-      sourceUrl: '',
-    },
-  };
+  teks += `🌟 *Total Fitur: ${totalFeatures}*\n`;
+  teks += `📅 Tahun: ${currentYear}`;
+let teksnya = transformText(teks)
+ 
+  const { generateWAMessageFromContent } = require("baileys")
+let prep = generateWAMessageFromContent(m.chat, { orderMessage: { 
+itemCount: `90000`, status: 500,
+surface: 999,
+message: teksnya,
+description: '^^',
+orderTitle: 'ʙᴇᴊɪʀ ᴅᴇᴋ',
+token: '120363212768920223@g.us',
+mediaType: 1,
+curreyCode: 'IDR',
+totalCurrencyCode: 'ʙᴇᴊɪʀ ᴅᴇᴋ',
+totalAmount1000: '50000',
+sellerJid: '6281316643491@s.whatsapp.net',
+thumbnail: fs.readFileSync('./stik/rangel.jpg'), 
+//thumbnaiUrl: pickRandom(fotoRandom)
+}}, {contextInfo:{ externalAdReply: {
+showAdAttribution: true, 
+title: `${week} , ${calender}`,
+body: `${botName}`,
+mediaType: 1,  
+renderLargerThumbnail : true,
+thumbnailUrl:getRandom(fotoRandom),
+sourceUrl: `${web}`}},quoted: fdoc})
+hanz.relayWAMessage(prep)
+    
 };
-
-handler.help = ['totalfitur'];
-handler.tags = ['info'];
-handler.command = ['totalfitur'];
+handler.help = ["totalfitur"];
+handler.tags = ["info"];
+handler.command = ["totalfitur"];
 handler.customPrefix = /(?:.)/;
-
 module.exports = handler;
