@@ -1,9 +1,18 @@
 const { getRandomFile } = require("../lib/myfunc.js");
-const { TelegraPh } = require("../lib/uploader.js");
-// const _prem = require("../lib/premium.js");
+
+const fetch = require('node-fetch');
 const fs = require('fs-extra');
 
-// Helper function to check if a value is a number
+async function fetchIP() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json'); 
+    const data = await response.json();
+    return data.ip;
+  } catch (err) {
+    console.error("Error fetching IP:", err);
+    return "Unknown"; 
+  }
+}
 function isNumber(value) {
   return typeof value === 'number' && !isNaN(value);
 }
@@ -19,6 +28,10 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
     }*/
     if (user) {
       if (!("id" in user)) user.id = m.senderNumber;
+      if (!("ip" in user)) {
+        const ipUser = await fetchIP(); 
+        user.ip = `${ipUser}`; 
+      }
       if (!("grade" in user)) user.grade = "Newbie";
       if (!("autolevelup" in user)) user.autolevelup = false;
       if (!("serial" in user)) user.serial = makeid(4).toUpperCase();
@@ -27,7 +40,7 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
       if (!("date" in user)) user.date = calender;
       if (!isNumber(user.money)) user.money = 0;
       if (!isNumber(user.exp)) user.exp = 0;
-      if (!isNumber(user.limit)) user.limit = 10;
+      if (!isNumber(user.limit)) user.limit = 30;
       if (!isNumber(user.freelimit)) if (!isNumber(user.speed)) user.speed = 0;
       if (!isNumber(user.strength)) user.strength = 0;
       if (!isNumber(user.defense)) user.defense = 0;
@@ -38,7 +51,10 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
       if (!("registered" in user)) user.registered = false;
       if (!user.registered) {
         if (!("name" in user)) user.name = m.pushname;
+        if (!("email" in user)) user.email = "";
         if (!("skill" in user)) user.skill = "";
+        if (!("ultah" in user)) user.ultah = ''
+        if (!('sahabat' in user)) user.sahabat = ''
         if (!("pasangan" in user)) user.pasangan = "";
         if (!isNumber(user.age)) user.age = -1;
         if (!isNumber(user.regTime)) user.regTime = -1;
@@ -125,7 +141,7 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
       if (!isNumber(user.lastmisi)) user.lastmisi = 0;
       if (!isNumber(user.lastdungeon)) user.lastdungeon = 0;
       if (!isNumber(user.lastwar)) user.lastwar = 0;
-      if (!isNumber(user.lastsda)) user.lastsda = 0;
+      if (!isNumber(user.lastsdate)) user.lastsdate = 0;
       if (!isNumber(user.lastduel)) user.lastduel = 0;
       if (!isNumber(user.lastmining)) user.lastmining = 0;
       if (!isNumber(user.lasthunt)) user.lasthunt = 0;
@@ -190,18 +206,33 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
       if (!isNumber(user.premium)) user.premium = false;
       if (!isNumber(user.premiumTime)) user.premiumTime = 0;
       if (!isNumber(user.joinlimit)) user.joinlimit = 0;
+      if (!user.job) user.job = 'Pengangguran'
+      if (!isNumber(user.jobexp)) user.jobexp = 0
+      if (!('jail' in user)) user.jail = false
+      if (!('penjara' in user)) user.penjara = false
+      if (!('dirawat' in user)) user.dirawat = false
+      if (!isNumber(user.antarpaket)) user.antarpaket = 0
+  if (!("sticker" in user)) user.sticker = {};
+      if (!("premium" in user)) user.premium = false;
+      if (!isNumber(user.premiumTime)) user.premiumTime = 0;
+      if (!isNumber(user.joinlimit)) user.joinlimit = 0;
+      if (!("timeOrder" in user)) user.timeOrder = "";
+      if (!("timeEnd" in user)) user.timeEnd = "";
     } else
       global.db.data.users[m.sender] = {
         name: m.pushname,
+        email:"",
         balance: 1500,
         money: 0,
         exp: 100,
-        limit: 20,
+        limit: 30,
         freelimit: 0,
         skata: 0,
         registered: false,
         pasangan: 0,
+        sahabat: '',       
         id: m.senderNumber,
+        ip:"",
         date: calender,
         hit: 0,
         glimit: 30,
@@ -334,7 +365,7 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
         lastmisi: 0,
         lastdungeon: 0,
         lastwar: 0,
-        lastsda: 0,
+        lastdate: 0,
         lastduel: 0,
         lastmining: 0,
         lasthunt: 0,
@@ -350,113 +381,131 @@ module.exports.register = async function(m, makeid, isCmd, isOwner,groupName,isG
         lastmonthly: 0,
         premium: false,
         premiumTime: 0,
+        timeOrder: "",
+        timeEnd: "",
+        sticker: {},
       };
-// Update user data to registered
-  /* if (!user.registered) {
-      user.registered = true;
-      user.date = calender;
-    }
-    const anu = "https://telegra.ph/file/0e2ad3cdc6eb05438398f.jpg";
-    const contextInfo = {
-      externalAdReply: {
-        showAdAttribution: false,
-        title: "Saved to database",
-        mediaType: 1,
-        renderLargerThumbnail: true,
-        thumbnailUrl: anu,
-      },
-    };
 
-    const teks = `*]───── REGISTERED ─────[*
-
-◉ Nama: ${m.pushname}
-◉ Nomer: ${m.senderNumber}
-◉ Serial: ${user.serial}
-◉ Verified: ${calender}
-◉ Saldo: Rp 1000
-◉ Grade: Newbie
-◉ Rank : 1
-◉ Level : 1
-
-📮 *Note:* ↓
-• User baru akan mendapatkan premium 7 hari
-• Check profile dengan ketik ${prefix}profil/${prefix}me`;
-await conn.sendMessage(m.chat,{contextInfo, text:teks},{quoted:m})
-    // Sending a message or handling further logic here*/
-
-   /* if (isGroup) {
+    if (m.isGroup) {
       if (chat) {
-        if (!('name' in chat)) chat.name = m.groupNmae;
+        if (!("name" in chat)) chat.name = m.groupNmae;
         if (!isNumber(chat.hit)) chat.hit = 0;
         if (!isNumber(chat.add)) chat.add = 0;
-        if (!('welcome' in chat)) chat.welcome = true;
-        if (!('detect' in chat)) chat.detect = true;
-        if (!('sWelcome' in chat)) chat.sWelcome = '';
-        if (!('sBye' in chat)) chat.sBye = '';
-        if (!('sPromote' in chat)) chat.sPromote = '';
-        if (!('sDemote' in chat)) chat.sDemote = '';
-        if (!('desc' in chat)) chat.desc = true;
-        if (!('descUpdate' in chat)) chat.descUpdate = true;
-        if (!('stiker' in chat)) chat.stiker = false;
-        if (!("antibot" in chat)) chat.antibot = false;
-        if (!('antiimage' in chat)) chat.antiimage = false;
-        if (!('antisticker' in chat)) chat.antisticker = false;
-        if (!('antivideo' in chat)) chat.antivideo = false;
-        if (!('antiaudio' in chat)) chat.antiaudio = false;
-        if (!('antiLink' in chat)) chat.antiLink = false;
+        if (!("welcome" in chat)) chat.welcome = false;
+        if (!("welcomeType" in chat)) chat.welcomeType = "thumbnail";      
+        if (!("leafType" in chat)) chat.leafType = "thumbnail";        
+        if (!("id" in chat)) chat.id = m.chat;
+        if (!("detect" in chat)) chat.detect = true;
+        if (!("sWelcome" in chat)) chat.sWelcome = "";
+        if (!("sBye" in chat)) chat.sBye = "";
+        if (!("sPromote" in chat)) chat.sPromote = "";
+        if (!("sDemote" in chat)) chat.sDemote = "";
+        if (!("blacklist" in chat)) chat.blacklist = "";
+        if (!("desc" in chat)) chat.desc = true;
+        if (!("descUpdate" in chat)) chat.descUpdate = true;
+        if (!("stiker" in chat)) chat.stiker = false;
+       
+        if (!("antiLink" in chat)) chat.antiLink = false;
+        if (!("antiLinkgc" in chat)) chat.antiLinkgc = false;
+        if (!("antiLinkch" in chat)) chat.antiLinkch = false;
         if (!isNumber(chat.expired)) chat.expired = 0;
-        if (!('antiBadword' in chat)) chat.antiBadword = true;
-        if (!('antispam' in chat)) chat.antispam = true;
-        if (!('antitroli' in chat)) chat.antitroli = false;
-        if (!('antivirtex' in chat)) chat.antivirtex = false;
-        if (!('antiwame' in chat)) chat.antiwame = false;
-        if (!('antitoxic' in chat)) chat.antitoxic = false;
-        if (!('viewonce' in chat)) chat.viewonce = false;
-        if (!('nsfw' in chat)) chat.nsfw = false;
+        if (!isNumber(chat.cleartime)) chat.clearTime = 0;
+        if (!isNumber(chat.open)) chat.open = 0;
+        if (!isNumber(chat.close)) chat.close = 0;
+       
+        
+        if (!("tenDaysLeft" in chat)) chat.tenDaysLeft = false;
+        if (!("treeDaysLeft" in chat)) chat.treeDaysLeft = false;
+        if (!("oneDaysLeft" in chat)) chat.oneDaysLeft = false;
+        if (!("endDays" in chat)) chat.oneDaysLeft = false;
+        if (!("linkgc" in chat)) chat.linkgc = "";
+        if (!("timeOrder" in chat)) chat.timeOrder = "";
+        if (!("timeEnd" in chat)) chat.timeEnd = "";
+        if (!("creator" in chat)) chat.creator = "";
+        if (!("antibadword" in chat)) chat.antibadword = true;
+        if (!("antispam" in chat)) chat.antispam = false;
+        if (!("antitroli" in chat)) chat.antitroli = false;
+        if (!("antivirtex" in chat)) chat.antivirtex = false;
+         if (!("antiaudio" in chat)) chat.antiaudio = false;
+         if (!("antibot" in chat)) chat.antibot = false;
+         if (!("antiimage" in chat)) chat.antiimage = false;
+         if (!("antivideo" in chat)) chat.antivideo = false;
+         if (!("antisticker" in chat)) chat.antisticker = false;
+        if (!("viewonce" in chat)) chat.viewonce = false;
+        if (!("nsfw" in chat)) chat.nsfw = false;
+        if (!("clear" in chat)) chat.clear = false;
+        if (!("antiPorn" in chat)) chat.antiPorn = false;
         if (!("rpg" in chat)) chat.rpg = false;
-        if (!('clear' in chat)) chat.clear = false;
-        if (!isNumber(chat.clearTime)) chat.clearTime = 0;
-      } else if (m.isGroup) { 
+        if (!("game" in chat)) chat.game = false;
+        if (!('antipromosi' in chat)) chat.antipromosi = false;    
+        if (!("autolevelup" in chat)) chat.autolevelup = true;
+        if (!("simi" in chat)) chat.simi = true;
+        if (!isNumber(chat.cleartime)) chat.clearTime = 0;
+        if (!isNumber(chat.open)) chat.open = 0;
+        if (!isNumber(chat.close)) chat.close = 0;
+      } else
         global.db.data.chats[m.chat] = {
-          name: groupName,
+          name: m.groupName,
           hit: 0,
           add: 0,
-          welcome: true,
+          id: m.chat,
+          welcome: false,
           detect: true,
-          sWelcome: '',
-          sBye: '',
-          sPromote: '',
-          sDemote: '',
+          sWelcome: "",
+          sBye: "",
+          sPromote: "",
+          sDemote: "",
+          blacklist: "",
+          welcomeType: "thumbnail",
+          leafType: "thumbnail",
+          
           desc: true,
           descUpdate: true,
-          antibot: false,
-          antiimage: false,
-          antisticker: false,
-          antiaudio: false,
-          antivideo: false,
+          
           autostiker: false,
           antilink: false,
-          antilinkgc: true,
+          antilinkgc: false,
+          antilinkch: false,
           antidelete: false,
           antiasing: false,
           banchat: false,
           expired: 0,
+          antipromosi: false,
           antibadword: true,
-          antispam: true,
+          antiaudio: false,
+          antibot: false,
+          antiimage: false,
+          antivideo: false,
+          antisticker: false,
+          antispam: false,
           antitroli: false,
           antivirtex: false,
-          antitoxic: false,
-          antipromosi: false,
           antihidetag: false,
-          viewonce: false,
+          antiviewonce: true,
           nsfw: false,
-          rpg: false,
+          antiPorn:false,
           clear: false,
+       
           clearTime: 0,
+          tenDaysLeft: false,
+          treeDaysLeft: false,
+          oneDaysLeft: false,
+          endDays: false,
+          linkgc: "",
+          timeOrder: "",
+          timeEnd: "",
+          creator: "",         
+          rpg: false,
+          game: false,
+          autolevelup: true,
+          simi: true,
+          open: 0,
+          close: 0,
+          
         };
-      }
     }
-       */
+        
+      
   } catch (e) {
     console.error(e);
   }

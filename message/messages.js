@@ -33,7 +33,7 @@
 ]
 //Ucapan lopyu
  exports.katalopyu = [
-"lopyu","lopyutu","i love you","love","lopyu"
+"lopyu","lopyutu","i love you","love","lopyu","Lopyu"
 ]
 //Ucapan selamat siang
  exports.katasiang = [
@@ -77,7 +77,7 @@
 "P","p","p","Pp","pp","P","pP","PP"
 ]
 //Respon link gc private OFF
- exports.hashira = [
+ exports.rangel = [
 "Link","link","Link grup","Link group","Linkgc","linkgc"
 ]
 //Respon panggilan bot
