@@ -1,20 +1,18 @@
 {
-  "name": "Menhera-md",
-  "version": "6.6.0",
-  "description": "Simple whatsapp bot with multi device.",
-  "main": "index.js",
-  "type": "commonjs",
-  "directories": {
-    "lib": "lib",
-    "message": "message"
-  },
-  "scripts": {
-    "start": "node index.js"
-  },
-  "author": "ehanz",
-  "license": "MIT",
-  "engines": {
-    "node": "18.x"
+ "name": "Menhera-md",
+ "version": "4.4.0",
+ "description": "Simple whatsapp bot with multi device.",
+ "main": "index.js",
+ "type": "commonjs",
+ "directories": {
+  "lib": "lib",
+  "message": "message"
+ },
+ "scripts": {
+  "start": "node index.js"
+ },
+ "author": "ehanz",
+ "license": "MIT"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
