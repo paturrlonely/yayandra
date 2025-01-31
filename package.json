@@ -1,24 +1,27 @@
 {
- "name": "Menhera-md",
- "version": "4.4.0",
- "description": "Simple whatsapp bot with multi device.",
- "main": "index.js",
- "type": "commonjs",
- "directories": {
-  "lib": "lib",
-  "message": "message"
- },
- "scripts": {
-  "start": "node index.js"
- },
- "author": "ehanz",
- "license": "MIT",
- "dependencies": {
+  "name": "Menhera-md",
+  "version": "6.6.0",
+  "description": "Simple whatsapp bot with multi device.",
+  "main": "index.js",
+  "type": "commonjs",
+  "directories": {
+    "lib": "lib",
+    "message": "message"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "ehanz",
+  "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@hapi/boom": "^9.1.4",
     "@hapi/hoek": "^9.3.0",
     "@vitalets/google-translate-api": "^9.2.0",
-    "@whiskeysockets/baileys": "github:kangfarrel/felzar-Baileys",
+    "@whiskeysockets/baileys": "github:kangfarrel/felzar-Baileys"
     "@types/node": "^10.17.60",
     "archiver": "^7.0.1",
     "awesome-phonenumber": "^2.48.0",
