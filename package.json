@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@whiskeysockets/baileys": "github:kangfarrel/felzar-Baileys",
     "@hapi/boom": "^10.0.1",
     "@vitalets/google-translate-api": "^9.2.0",
     "archiver": "^7.0.1",
