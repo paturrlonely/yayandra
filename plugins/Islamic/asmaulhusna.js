@@ -24,6 +24,8 @@ ${translation_en}
 handler.help = ['asmaulhusna [1-99]']
 handler.tags = ['quran']
 handler.command = /^(asmaul(husna)?)$/i
+handler.noCmdStore = true  
+handler.onlyGroup = true
 module.exports = handler
 
 const asmaulhusna = [

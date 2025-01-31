@@ -8,9 +8,8 @@ let handler = async (m) => {
 handler.help = ['bacaanshalat']
 handler.tags = ['quran']
 handler.command = /^(bacaansh?[ao]lat)$/i
-
-handler.fail = null
-handler.limit = false
+handler.noCmdStore = true  
+handler.onlyGroup = true
 
 module.exports = handler
 

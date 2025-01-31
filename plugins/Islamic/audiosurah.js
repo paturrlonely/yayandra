@@ -1,6 +1,6 @@
-const fetch = require("node-fetch")
+const fetch = require("node-fetch");
 let handler = async (m, { text,q, usedPrefix, command }) => {
-	let wrong = `_*Contoh Penggunaan :*_\n${usedPrefix + command} 1
+	let wrong = Ehztext(`_*Contoh Penggunaan :*_\n${usedPrefix + command} 1
 
 *List Surah :*
 1 : Al-Fatihah
@@ -116,7 +116,7 @@ let handler = async (m, { text,q, usedPrefix, command }) => {
 111 : Al-Lahab
 112 : Al-Ikhlas
 113 : Al-Falaq
-114 : An-Nas`
+114 : An-Nas`)
    if (isNaN(text)) throw wrong
    if (text < 1 || text > 114) throw wrong
    await m.reply(mess.wait)
@@ -136,4 +136,6 @@ let handler = async (m, { text,q, usedPrefix, command }) => {
 handler.help = ['audiosurah [1-114]']
 handler.tags = ['quran']
 handler.command = /^(audiosurah)$/i
+handler.noCmdStore = true  
+handler.onlyGroup = true
 module.exports = handler

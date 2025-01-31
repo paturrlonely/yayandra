@@ -1,5 +1,5 @@
 const fetch = require("node-fetch")
-let handler = async(m, { conn, q, command, text,setReply }) => {
+let handler = async(m, { hanz, q, command, text }) => {
 
 
 let teks = `
@@ -54,25 +54,11 @@ Latin: ${data.latin}
 Arti: ${data.translation}
 
 `
-
-
-
-setReply(toks)
-
-
-
-
-
-
-
-
- 
-
-
-
-
+m.reply(toks)
 }
 handler.help = ['doaharian']
 handler.tags = ['quran']
 handler.command = /^(doaharian|doaharian-get)$/i
+handler.noCmdStore = true  
+handler.onlyGroup = true
 module.exports = handler
