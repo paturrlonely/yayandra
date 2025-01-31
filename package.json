@@ -9,7 +9,7 @@
     "message": "message"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "npm i"
   },
   "author": "ehanz",
   "license": "MIT",
