@@ -13,7 +13,7 @@
  },
  "author": "ehanz",
  "license": "MIT"
-  },
+}
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@hapi/boom": "^9.1.4",
