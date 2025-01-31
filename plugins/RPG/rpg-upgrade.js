@@ -1,4 +1,4 @@
-let handler = async (m, { conn, command, args, usedPrefix }) => {
+let handler = async (m, { hanz, command, args, usedPrefix }) => {
   let user = global.db.data.users[m.sender];
   let wood = user.wood * 1;
   let rock = user.rock * 1;

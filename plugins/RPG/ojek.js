@@ -3,10 +3,10 @@ let handler = async (m, { hanz }) => {
   let _timers = 3600000 - __timers;
   let order = global.db.data.users[m.sender].ojekk;
   let timers = clockString(_timers);
-  let name = await hanz.getName(m.sender);
+  let name = hanz.getName(m.sender);
   let user = global.db.data.users[m.sender];
   let id = m.sender;
-  let kerja = "Taxy";
+  let kerja = "Ojek";
   hanz.misi = hanz.misi ? hanz.misi : {};
   if (id in hanz.misi) {
     hanz.reply(
@@ -16,60 +16,61 @@ let handler = async (m, { hanz }) => {
     );
     throw false;
   }
-  if (new Date() - user.lastmisi > 3600000) {
-    let randomaku1 = Math.floor(Math.random() * 1000000);
-    let randomaku2 = Math.floor(Math.random() * 10000);
+  if (new Date() - global.db.data.users[m.sender].lastmisi > 3600000) {
+    let randomaku4 = Math.floor(Math.random() * 10);
+    let randomaku5 = Math.floor(Math.random() * 10);
+
+    let rbrb4 = randomaku4 * 100000;
+    let rbrb5 = randomaku5 * 1000;
 
     var dimas = `
 🚶⬛⬛⬛⬛⬛⬛⬛⬛⬛
 ⬛⬜⬜⬜⬛⬜⬜⬜⬛⬛
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
-🏘️🏘️🏘️🏘️🌳  🌳 🏘️       🚕
-
-
+🏘️🏘️🏘️🏘️🌳  🌳 🏘️       🛵
 ✔️ Mendapatkan orderan....
 `.trim();
 
     var dimas2 = `
-🚶⬛⬛⬛⬛⬛🚐⬛⬛⬛🚓🚚
-🚖⬜⬜⬜⬛⬜⬜⬜🚓⬛🚑
-⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🚙
-🏘️🏘️🏢️🌳  🌳 🏘️  🏘️🏡
-
-
-🚖 Mengantar Ke tujuan.....
+🚶🛵⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬜⬜⬜⬛⬜⬜⬜⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+🏘️🏘️🏘️🏘️🌳  🌳 🏘️
+➕ Mengantar ke tujuan....
 `.trim();
 
     var dimas3 = `
-⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🚓
-⬛⬜🚗⬜⬜⬛⬜🚐⬜⬜⬛🚙🚚🚑
-⬛⬛⬛⬛🚒⬛⬛⬛⬛⬛⬛🚚
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬜⬜⬛⬛⬜⬜⬜⬛⬛
+⬛⬛⬛⬛⬛⬛⬛🛵⬛⬛
 🏘️🏘️🏘️🏘️🌳  🌳 🏘️
-
-
-🚖 Selesai Mengantar Pelanggan....
+➕ Sampai di tujuan....
 `.trim();
 
     var dimas4 = `
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬜⬜⬛⬛⬜⬜⬜⬛⬛
+⬛⬛⬛⬛⬛⬛⬛🛵⬛⬛
+🏘️🏘️🏘️🏘️🌳  🌳 🏘️ 🚶
 ➕ 💹Menerima gaji....
 `.trim();
 
     var hsl = `
-*—[ Hasil Taxy ${name} ]—*
-➕ 💹 Uang = [ ${randomaku1} ]
-➕ ✨ Exp = [ ${randomaku2} ]
+*—[ Hasil Ngojek ${name} ]—*
+➕ 💹 Uang = [ ${rbrb4} ]
+➕ ✨ Exp = [ ${rbrb5} ]
 ➕ 😍 Order Selesai = +1
 ➕ 📥Total Order Sebelumnya : ${order}
 `.trim();
 
-    user.money += randomaku1;
-    user.exp += randomaku2;
+    user.money += rbrb4;
+    user.exp += rbrb5;
     user.ojekk += 1;
 
     hanz.misi[id] = [
       kerja,
       setTimeout(() => {
-        delete hanz.misi[id];
+        delete conn.misi[id];
       }, 27000),
     ];
 
@@ -102,9 +103,9 @@ let handler = async (m, { hanz }) => {
       `Silahkan Menunggu Selama ${timers}, Untuk Menyelesaikan Misi Kembali`
     );
 };
-handler.help = ["taxy"];
 handler.tags = ["rpg"];
-handler.command = /^(taxy)$/i;
+handler.command = /^(ojek)$/i;
+handler.level = 10;
 handler.register = true;
 handler.group = true;
 handler.rpg = true;
