@@ -1,6 +1,6 @@
 let handler = async (m, { q, isOwner, setReply, command,prefix }) => {
   if (!isOwner) return setReply(mess.only.owner);
-  if (!q) return setReply(`Example:\n${prefix + command} menu.js`);
+  if (!q) return setReply(`Example:\n${prefix + command} Downloader/ehanz.js`);
   let path = q.endsWith(".js") ? q : q + ".js";
   await require("fs").unlinkSync("plugins/" + path);
   setReply(`Plugin ${path} telah di hapus!`);

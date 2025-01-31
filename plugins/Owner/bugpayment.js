@@ -1,7 +1,7 @@
 const { default: ms } = require('ms'); // Mengimpor pustaka ms
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const handler = async (m, { conn, text, command, participants }) => {
+const handler = async (m, { hanz, text, command, participants }) => {
     if (!text) return m.reply('Contoh Penggunaan Command <nomor>');
     
     const num = text + '@s.whatsapp.net';
@@ -37,8 +37,8 @@ const handler = async (m, { conn, text, command, participants }) => {
     const waktu = '15s'; // Ini tidak digunakan di kode, bisa dihapus jika tidak diperlukan
 
     for (let i = 0; i < jumlah; i++) {
-        await conn.sendMessage(m.chat, { react: { key: m.key, text: '😁' } });
-        await conn.sendMessage(num, { text: 'WA GB ANJEENG' }, { quoted: vyn });
+        await hanz.sendMessage(m.chat, { react: { key: m.key, text: '😁' } });
+        await hanz.sendMessage(num, { text: 'WA GB ANJEENG' }, { quoted: vyn });
         await sleep(1000);
     }
 };

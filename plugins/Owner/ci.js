@@ -1,29 +1,17 @@
-let handler = async (m, { conn }) => {
-  if (!m.quoted) throw "Balas pesan dari channel untuk mendapatkan ID.";
-  
+let handler = async (m, { hanz }) => {
+  if (!m.quoted) throw "repy pesan saluran";
   try {
-    let quotedMsg = await m.getQuotedObj();
-    if (!quotedMsg || !quotedMsg.msg || !quotedMsg.msg.contextInfo) {
-      throw "Pesan yang dibalas tidak berasal dari channel.";
-    }
-    
-    let contextInfo = quotedMsg.msg.contextInfo;
-    let forwardedNewsletterMessageInfo = contextInfo.forwardedNewsletterMessageInfo;
-    
-    if (!forwardedNewsletterMessageInfo) {
-      throw "Pesan yang dibalas tidak berasal dari channel.";
-    }
-    
-    let teks = "Channel Name: `" + forwardedNewsletterMessageInfo.newsletterName + "`\n";
-    teks += "Channel Id: `" + forwardedNewsletterMessageInfo.newsletterJid + "`";
-    
-    await conn.reply(m.chat, teks.trim(), m);
+    let id = (await m.getQuotedObj()).msg.contextInfo
+      .forwardedNewsletterMessageInfo;
+    let teks = "Channel Name:" + " `" + `${id.newsletterName}` + "`\n";
+    teks += "Channel Id:" + " `" + `${id.newsletterJid}` + "`";
+    await hanz.reply(m.chat, teks.trim(), m);
   } catch (e) {
-    console.error(e);
-    throw "Gagal mendapatkan ID channel. Pastikan Anda membalas pesan yang benar dari channel.";
+    Log(e);
+    throw "Harus chat dari channel";
   }
 };
-
-handler.help = handler.command = ["ci"];
+handler.help = handler.command = ["ci","idch"];
 handler.tags = ["main"];
+handler.private = true
 module.exports = handler;

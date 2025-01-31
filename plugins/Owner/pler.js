@@ -1,6 +1,6 @@
 const fs = require('fs')
 const fetch = require('node-fetch')
-let handler = async (m, { conn, args}) => { 
+let handler = async (m, { hanz, args}) => { 
 
 var teknya = args.join(" ")
  var call = {
@@ -10,7 +10,7 @@ var teknya = args.join(" ")
  title: `${teknya}`
  }
 }
-conn.relayMessage(m.chat, call, {})
+hanz.relayMessage(m.chat, call, {})
 }
  handler.help = ['pler', 'warcall', 'call', 'reyz', 'tlpn'];
 handler.tags = ['warcall-gc'];

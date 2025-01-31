@@ -1,4 +1,4 @@
-let handler = async (m,{ q, conn, isOwner, setReply, args, usedPrefix, command }) => {
+let handler = async (m,{ q, hanz, isOwner, setReply, args, usedPrefix, command }) => {
 
 
 
@@ -6,7 +6,7 @@ let handler = async (m,{ q, conn, isOwner, setReply, args, usedPrefix, command }
     const fs = require('fs');
     const archiver = require('archiver');
     const path = require('path');
-    let jpegThumbnail = fs.readFileSync("./stik/thumbnaildokumen.jpg");
+    let jpegThumbnail = fs.readFileSync("./stik/menhera.jpg");
     // Nama file zip yang akan dihasilkan
     const output = fs.createWriteStream(`${botName} ${calender}.zip`);
     const nameFile = `${botName} ${calender}.zip`
@@ -19,7 +19,7 @@ let handler = async (m,{ q, conn, isOwner, setReply, args, usedPrefix, command }
     output.on('close', async function() {
         m.reply(`File zip berhasil dibuat\nTotal ${await FileSize(archive.pointer())}`);
          
-    await conn.sendMessage(m.sender, {document:fs.readFileSync(nameFile) , jpegThumbnail,mimetype: "application/zip", fileName: nameFile}, {quoted: m})
+    await hanz.sendMessage(m.sender, {document:fs.readFileSync(nameFile) , jpegThumbnail,mimetype: "application/zip", fileName: nameFile}, {quoted: m})
     
     await fs.unlinkSync(nameFile)
     });

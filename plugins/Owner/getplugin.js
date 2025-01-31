@@ -2,7 +2,7 @@ const { readdirSync, statSync } = require('fs')
 const { join, parse } = require('path')
 const fs = require("fs-extra")
 
-let handler = async (m, { q,usedPrefix, command, text }) => {
+let handler = async (m, { q,usedPrefix, command,hanz, text }) => {
     let pluginFiles = getPluginFiles("./plugins");
     if (!text) throw `uhm.. teksnya mana?\n\ncontoh:\n${usedPrefix + command} menu`;
 
@@ -12,9 +12,9 @@ let handler = async (m, { q,usedPrefix, command, text }) => {
         return;
     }
     let file = fs.readFileSync(pluginPath);
-    let jpegThumbnail = fs.readFileSync("./stik/thumbnaildokumen.jpg");
+    let jpegThumbnail = fs.readFileSync("./stik/menhera.jpg");
     let mimetype = "text/javascript"
-    conn.sendMessage(
+    hanz.sendMessage(
         m.chat,
         { document: file, fileName: q +'.js', mimetype, jpegThumbnail },
         { quoted: m }

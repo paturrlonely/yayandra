@@ -1,6 +1,6 @@
 const fs = require("fs-extra")
 
-let handler = async (m, { q, conn, setReply }) => {
+let handler = async (m, { q, hanz, setReply }) => {
   if (!q)
     return setReply(
       "Mau cari file apa? contoh getfile group.js, tambahkan -text di bagian akhir untuk mengirim dengan teks"
@@ -15,7 +15,7 @@ let handler = async (m, { q, conn, setReply }) => {
       : format == "json"
       ? "application/json"
       : "application/octet-stream";
-  let jpegThumbnail = fs.readFileSync("./stik/thumbnaildokumen.jpg");
+  let jpegThumbnail = fs.readFileSync("./stik/menhera.jpg");
   setReply("Getting File...");
  
   let teks = q.replace("-text", "").replace(" ", "");
@@ -41,7 +41,7 @@ let handler = async (m, { q, conn, setReply }) => {
     m.reply(require("fs").readFileSync(`./${teks}`, "utf-8"));
   } else if (dir) {
     ada = true;
-    conn.sendMessage(
+    hanz.sendMessage(
       m.chat,
       {
         document: fs.readFileSync(`./${teks}`),
@@ -60,17 +60,17 @@ let handler = async (m, { q, conn, setReply }) => {
       let file = fs.readFileSync(`./${i}/${teks}`);
       if (format == "mp4") {
         ada = true;
-        conn.sendMessage(m.chat, { video: file }, { quoted: m });
+        hanz.sendMessage(m.chat, { video: file }, { quoted: m });
       } else if (format == "jpg" || format == "jpeg") {
         ada = true;
-        conn.sendMessage(m.chat, { image: file }, { quoted: m });
+        hanz.sendMessage(m.chat, { image: file }, { quoted: m });
       } else {
         if (text) {
           ada = true;
           m.reply(require("fs").readFileSync(`./${i}/${teks}`, "utf-8"));
         } else {
           ada = true;
-          conn.sendMessage(
+          hanz.sendMessage(
             m.chat,
             { document: file, fileName: teks, mimetype, jpegThumbnail },
             { quoted: m }
