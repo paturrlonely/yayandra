@@ -18,7 +18,7 @@
     "@hapi/boom": "^9.1.4",
     "@hapi/hoek": "^9.3.0",
     "@vitalets/google-translate-api": "^9.2.0",
-    "@whiskeysockets/baileys": "github:kangfarrel/felzar-Baileys"
+    "@whiskeysockets/baileys": "github:kangfarrel/felzar-Baileys",
     "@types/node": "^10.17.60",
     "archiver": "^7.0.1",
     "awesome-phonenumber": "^2.48.0",
