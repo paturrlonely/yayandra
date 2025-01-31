@@ -1,124 +1,114 @@
 const version = require("baileys/package.json").version
 global.language = "id"
-//connecting 
+const stringSimilarity = require("string-similarity");
+
+// ≠========== CONNECTING ========== //
 global.sessionName = "session"
 global.pairingCode = true // true / false
-global.pairingNumber = "6285795718659" // masukin nomor bot
+global.pairingNumber = "6283843107764" // masukin nomor bot
 global.runWith = "pterodactyl"
-global.newsletterJid = "120363185390263663@newsletter"
-global.newsletterName = "© Rangelofficial"
-//owner
-global.ownerName = "-єнαηz"
-global.nomerOwner = ["6281316643491"]
-global.ownerNumber = "6281316643491@s.whatsapp.net"
-//sosmed
-global.syt = 'https://www.youtube.com/@rangelbot'
-global.sgc = 'https://chat.whatsapp.com/CeDF03ZTpBA2QxN581BwaE'
-global.sig = 'https://instagram.com/ehanzdhoanx'
-global.web = 'https://rangelofficial.github.io/webprofile/'
-//setbot
-global.botName = "Mҽɳԋҽɾα мÐᶜᴶˢ"
-global.nameToko = "© officialEhz™"
-global.wm = "© Rangelofficial "
-global.setmenu = "button" 
-global.docType = "application/vnd.ms-excel"
-global.public = true
-global.baileysMd = true
-global.antiSpam = true
-global.maxwarn = '3' // Peringatan maksimum
-//global.prefa = "."
-global.fake = botName
-global.Console = false
-global.session = "session" 
-global.autorespon = true
-global.copyright = `Bot WhatsApp⁰⁵`
-global.baileysVersion = `Baileys ${version}`
-global.On = "On"
-global.Off ="Off"
-global.autoblockcmd = false
-global.fake1 ="Bot WhatsApp"
-global.packName = `ehanz pen SUKSES:)`
-global.authorName = "wa : 6281316643491"
-global.replyType = "web"
-global.setwelcome = "type1"
+// ===≠======= SETOWNER ==========//
+global.ownerName = "-itsmefathurrzx"
+global.nomerOwner = ["6281260431003"]
+global.ownerNumber = "6281260431003@s.whatsapp.net"
 
-global.autoReport = true
-global.autoLevel = true
-global.autoSticker = true
-global.autoBio = true
+// ========= SOSMED ============//
+global.syt = 'https://www.youtube.com/@itsmefathurrzx'
+global.sgc = 'https://chat.whatsapp.com/CRqd9QL3qtsFOk4T0fdbjI'
+global.sig = 'https://www.instagram.com/itsmefathurrzx'
+global.stt = 'https://www.tiktok.com/@itsmefathurrzx'
+global.sgh = 'https://github.com/Rangelofficial'
+global.web = 'https://chat.whatsapp.com/CRqd9QL3qtsFOk4T0fdbjI'
+// ≠========= SETBOT ========== //
+global.botName = "cyaaa botzz"
+global.newsletterJid = "999999@newsletter"
+global.newsletterJid1 = "99999@newsletter" // id untuk upch
+global.newsletterName = "cyaa botzz  ヅ"
+global.fake = botName
+global.session = "session" 
+global.copyright = `cyaa botzz by itsmefathurrzx`
+global.baileysVersion = `Baileys ${version}`
+global.Console = true
+global.idGcBot = '120363199179422985@g.us'
+// ======= SETSTICKER ======== //
+global.packName = `© cyaaa botzz`
+global.authorName = "by ɪᴛsᴍᴇғᴀᴛʜᴜʀʀᴢx"
+global.wm = "© cyaa cantikk"
+// ======= GAME & PERINGATAN ========== //
 global.gamewaktu = 60
 global.limitCount = 30
 global.Intervalmsg = 1000 //detik
-//hiasan
-global.gris = '`' // Jangan di ubah
-global.fileStackApi ="AVKHbeyXsT0G9IKI01qenz" //daftar di filestack
-//Toko Online 
-global.fotoPakaian = ["https://telegra.ph/file/a2df78368a21a3efc9f34.jpg",
-"https://telegra.ph/file/7583097174a260eeffcaf.jpg"]
-global.fotoHijab = [""]
-global.fotoDistro = [""]
-
-global.fotoRandom = [
-"https://telegra.ph/file/6fbd28208a0705cfa8eca.jpg",
-"https://telegra.ph/file/da1dace4a2d67940be922.jpg",
-"https://telegra.ph/file/a082fe4601ca3216b032c.jpg"
-]
-
-global.flaaa = [
-  "https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=sketch-name&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextType=1&fillTextPattern=Warning!&text=",
-  "https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=sketch-name&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextType=1&fillTextPattern=Warning!&fillColor1Color=%23f2aa4c&fillColor2Color=%23f2aa4c&fillColor3Color=%23f2aa4c&fillColor4Color=%23f2aa4c&fillColor5Color=%23f2aa4c&fillColor6Color=%23f2aa4c&fillColor7Color=%23f2aa4c&fillColor8Color=%23f2aa4c&fillColor9Color=%23f2aa4c&fillColor10Color=%23f2aa4c&fillOutlineColor=%23f2aa4c&fillOutline2Color=%23f2aa4c&backgroundColor=%23101820&text=",
-];
-
-//Apikey Nya
-global.skizo = 'Rangelofficial'
-global.Betabotz = 'LSd7Lq9S'
-global.Lolhuman = '652c7664865e2b0e70929768',
-global.FilestackApi = 'AVKHbeyXsT0G9IKI01qenz'
-// cpanel ======//
-global.domain = 'https://ehang-panel.srvpribxjaka.my.id'
-global.apiPlta = '' // Isi Apikey Plta Lu
-global.apiPltc = '' // Isi Apikey Pltc Lu 
-global.eggs = '15' // id eggs yang dipakai kalo id nya 5 biarin aja ini jangan di ubah
-global.location = '1' // id location
-//Top up payment 
-global.payment = {
-    dana: {
-      nomer: "081316643491",
-      atas_nama: "Raihan Fadillah"
-    }
-} // isi nomor dana lu
-global.untung = "1"
-  //Ini profit yg kamu dapat, 1 = 1% maka harga akan meningkat 1%
-global.apikeyAtlantic = "" //Kaian haris dafta dulu di ( https://m.atlantic-pedia.co.id ) kalo udah daftar di link tersebut,silaka hubungi nomor ini ( +62 851-5508-1449 ) lalu kirim pesan ( "Halo kak saya ingin upgrade akun ke h2" ) jika proses upgrade akun ke h2 sudah diterima maka akan di kasih link berikut nya oleh nomor tersebut yaitu link h2 dan kalian bisa mengambil apikey nya setelah upgrade ke h2
+global.multiplier = 38
+global.maxwarn = '3' // Peringatan maksimum
 global.gcounti = {
 'prem' : 1000,
 'user' : 5
 } 
- 
-global.multiplier = 38
-//*========== HIASAN ===========*/
-global.decor = {
-  menut: "❏═┅═━–〈",
-  menub: "┊•",
-  menub2: "┊",
-  menuf: "┗––––––––––✦",
-  hiasan: "꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷ ͝ ꒦ ͝ ꒷",
+// ========== GAMBAR URL =========== //
+// Buat Thumbnail Dan setReply Jika Kedaluarsa,Ganti Yah
+global.fotoRandom = [
+"https://raw.githubusercontent.com/Rangelofficial/Uploade-db/main/uploader/1735497794395.jpg",
+"https://pomf2.lain.la/f/c4lkd8op.jpg",
+"https://telegra.ph/file/a082fe4601ca3216b032c.jpg"
+]
+// ========== APIKEY ============ //
+global.skizo = 'Rangelofficial'
+global.Betabotz = 'LSd7Lq9S'
+global.Botcahx = 'b8ap7rFL'
+global.Lolhuman = 'GataDios'
+global.FilestackApi = 'AVKHbeyXsT0G9IKI01qenz'
+global.fileStackApi ="AVKHbeyXsT0G9IKI01qenz" //daftar di filestack
+global.Apiflash = "9b9e84dfc18746d4a19d3afe109e9ea4"; 
+global.apiTermai = 'Bell409'
+global.tokenGithub = ''
+global.tokenGhDatabase = ''
+global.apiEmail = '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' // jan dihapus 
+// =========== CPANEL ============ //
 
-  menut: "––––––『",
-  menuh: "』––––––",
-  menub: "┊☃︎ ",
-  menuf: "┗━═┅═━––––––๑\n",
-  menua: "",
-  menus: "☃︎",
 
-  htki: "––––––『",
-  htka: "』––––––",
-  haki: "┅━━━═┅═❏",
-  haka: "❏═┅═━━━┅",
-  lopr: "Ⓟ",
-  lolm: "Ⓛ",
-  htjava: "❃",
+global.domain = 'https://mypanel.raihanfadillah.xyz'
+global.apiPlta = '' // Isi Apikey Plta Lu
+global.apiPltc = '' // Isi Apikey Pltc Lu 
+global.eggs = '15' // id eggs yang dipakai kalo id nya 5 biarin aja ini jangan di ubah
+global.location = '1' // id location
+
+global.waktuPanel = {
+    onegb: { waktu: 30, harga: "1k" },
+    twogb: { waktu: 30, harga: "2k" },
+    threegb: { waktu: 30, harga: "3k" },
+    fourgb: { waktu: 30, harga: "4k" },
+    fivegb: { waktu: 30, harga: "5k" },
+    sixgb: { waktu: 30, harga: "6k" },
+    sevengb: { waktu: 30, harga: "7k" },
+    eightgb: { waktu: 30, harga: "8k" },
+    unli: { waktu: 30, harga: "10k" }
 };
+// ======== TOPUP PAYMENT ========= //
+global.payment = {
+    dana: {
+      nomer: "081260431003",
+      atas_nama: "Fathur"
+    }
+} // isi nomor dana lu
+global.untung = "1"
+  //Ini profit yg kamu dapat, 1 = 1% maka harga akan meningkat 1%
+global.apikeyAtlantic = "" 
+// ======== STORE RANGEL- ==========//
+global.nameToko = "© officialEhz"
+global.newsletterJidEhz = "999999@newsletter"
+global.fotoPakaian = [ 
+"https://telegra.ph/file/a2df78368a21a3efc9f34.jpg",
+"https://telegra.ph/file/7583097174a260eeffcaf.jpg"]
+global.fotoHijab = [""]
+global.fotoDistro = [""]
+global.waktuOpenStore = '18:00'
+global.waktuCloseStore = '12:00'
+global.gcStore = 'https://chat.whatsapp.com/CRqd9QL3qtsFOk4T0fdbjI'
+global.idGcStore = '120363199179422985@g.us' // masukin id gc store kalian 
+// ========= HIASAN =========== //
+global.gris = '`' // Jangan di ubah
+global.gris1 = '```'
+
 /*============== EMOJI ==============*/
 global.rpg = {
   emoticon(string) {
@@ -188,6 +178,8 @@ global.rpg = {
       speed: "🏃",
       tbox: "🗄️",
     };
+      
+      
     let results = Object.keys(emot)
       .map((v) => [v, new RegExp(v, "gi")])
       .filter((v) => v[1].test(string));
@@ -196,18 +188,129 @@ global.rpg = {
   },
 };
 
-
+function clockString(ms) {
+        let months = isNaN(ms) ? "--" : Math.floor(ms / (86400000 * 30.44));
+        let d = isNaN(ms) ? "--" : Math.floor(ms / 86400000);
+        let h = isNaN(ms) ? "--" : Math.floor(ms / 3600000) % 24;
+        let m = isNaN(ms) ? "--" : Math.floor(ms / 60000) % 60;
+        let s = isNaN(ms) ? "--" : Math.floor(ms / 1000) % 60;
+        let monthsDisplay = months > 0 ? months + " bulan, " : "";
+        let dDisplay = d > 0 ? d + " hari, " : "";
+        let hDisplay = h > 0 ? h + " jam, " : "";
+        let mDisplay = m > 0 ? m + " menit, " : "";
+        let sDisplay = s > 0 ? s + " detik" : "";
+        let time = months > 0 ? monthsDisplay + dDisplay : d > 0 ? dDisplay + hDisplay : h > 0 ? hDisplay + mDisplay  : mDisplay + sDisplay
+      
+        return time;
+      }
 let d = new Date();
-      let locale = "id";
-      let gmt = new Date(0).getTime() - new Date("1 Januari 2021").getTime();
-      let week = d.toLocaleDateString(locale, { weekday: "long" });
-      const calender = d.toLocaleDateString("id", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      });
+let locale = "id";
+// Automatically adjust the reference year
+let currentYear = d.getFullYear();
+let gmt = new Date(0).getTime() - new Date(`1 Januari ${currentYear}`).getTime();
+let week = d.toLocaleDateString(locale, { weekday: "long" });
+const calender = d.toLocaleDateString(locale, {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 
+
+
+const toFirstCase = (str) => {
+  let first = str
+  .split(" ") // Memenggal nama menggunakan spasi
+  .map((nama) => nama.charAt(0).toUpperCase() + nama.slice(1)) // Ganti huruf besar kata-kata pertama
+  .join(" ");
+  
+  return first;
+  }
+function Ehztext (text, style = 1){
+  var abc = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
+  var ehz = {
+    1: 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡxʏᴢ1234567890'
+  };
+  var replacer = [];
+  abc.map((v, i) =>
+    replacer.push({
+      original: v,
+      convert: ehz[style].split('')[i]
+    })
+  );
+  var str = text.split('');
+  var output = [];
+  str.map((v) => {
+    if (v.toUpperCase() !== v.toLowerCase() && v === v.toUpperCase()) {
+      // If the character is uppercase, push it unchanged
+      output.push(v);
+    } else {
+      // If the character is lowercase or not a letter, find and convert it
+      const find = replacer.find((x) => x.original == v.toLowerCase());
+      find ? output.push(find.convert) : output.push(v);
+    }
+  });
+  return output.join('');
+};
+
+function transformText(text) {
+  const charMap = {
+    'A': 'ᴀ', 'B': 'ʙ', 'C': 'ᴄ', 'D': 'ᴅ', 'E': 'ᴇ', 'F': 'ғ', 'G': 'ɢ', 'H': 'ʜ', 'I': 'ɪ',
+    'J': 'ᴊ', 'K': 'ᴋ', 'L': 'ʟ', 'M': 'ᴍ', 'N': 'ɴ', 'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ǫ', 'R': 'ʀ',
+    'S': 's', 'T': 'ᴛ', 'U': 'ᴜ', 'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x', 'Y': 'ʏ', 'Z': 'ᴢ',
+    '0': '𝟶', '1': '𝟷', '2': '𝟸', '3': '𝟹', '4': '𝟺', '5': '𝟻', '6': '𝟼', '7': '𝟽', '8': '𝟾', '9': '𝟿'
+  };
+
+  return text.toUpperCase().split('').map(char => {
+    return charMap[char] || char;
+  }).join('');
+}
+
+function makeid(length){
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+const sleep = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+     
+Array.prototype.getRandom = function() {
+  return this[Math.floor(Math.random() * this.length)];
+};
+
+function getRandom(array) {
+  return array.getRandom();
+}
+
+function getRandomFile (ext){
+  return `${Math.floor(Math.random() * 10000)}${ext}`;
+};
+const Log = (text) => {
+      console.log(text);
+      };
+async function similarity(one,two) {
+const treshold = stringSimilarity.compareTwoStrings(one, two)
+return treshold.toFixed(2)
+}
+
+global.similarity = (one,two) => similarity(one,two);
+global.clockString = clockString;
+global.toFirstCase = toFirstCase;
+global.getRandomFile = getRandomFile
+global.getRandom = getRandom
 global.calender = calender;
+global.Ehztext = Ehztext;
+global.transformText = transformText;
+global.makeid = makeid;
+global.calender = calender;
+global.sleep = sleep;
+global.week = week;
+global.Log = Log;
 
 const fs = require("fs");
 const { color } = require("./lib/color");
