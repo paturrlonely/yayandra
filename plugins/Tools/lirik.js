@@ -1,67 +1,29 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const fetch = require('node-fetch');
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw (`*• Example:* ${usedPrefix + command} *[Name song]*`);
-  
-  try {
-    let lirik = await findSongs(text);
-    let caption = `*[ ${command === "lirik" ? command + " SEARCH" : command.toUpperCase().split("").join(" ")} ]*
-*• Title:* ${lirik.title}
-*• Album:* ${lirik.album}
+const handler = async (m, { text, hanz, usedPrefix, command }) => {
+    if (!text) throw 'Masukkan lirik atau judulnya';
+    m.reply(mess.wait)
 
-\`\`\`${lirik.lyrics}\`\`\``;
-    conn.sendFile(m.chat, lirik.thumb, null, caption, m);
-  } catch (e) {
-    throw "Request Error";
-  }
-}
 
-handler.help = ["lirik", "lyrics"].map(a => a + " *[Name song]*");
-handler.tags = ["internet"];
-handler.command = ["lirik", "lyrics"];
+    try {
+        const response = await fetch(`https://api.nyxs.pw/tools/lirik?title=${encodeURIComponent(text)}`);
+        
+        if (!response.ok) throw new Error('Gagal menghubungi API');
 
-async function findSongs(text) {
-  try {
-    const { data } = await axios.get(
-      "https://songsear.ch/q/" + encodeURIComponent(text)
-    );
-    const $ = cheerio.load(data);
-    const result = {
-      title:
-        $("div.results > div:nth-child(1) > .head > h3 > b").text() +
-        " - " +
-        $("div.results > div:nth-child(1) > .head > h2 > a").text(),
-      album: $("div.results > div:nth-child(1) > .head > p").text(),
-      number: $("div.results > div:nth-child(1) > .head > a")
-        .attr("href")
-        .split("/")[4],
-      thumb: $("div.results > div:nth-child(1) > .head > a > img").attr("src"),
-    };
+        const data = await response.json();
+        
+        if (!data.result) throw new Error('Lirik tidak ditemukan');
 
-    const { data: lyricData } = await axios.get(
-      `https://songsear.ch/api/song/${result.number}?text_only=true`
-    );
-    const lyrics = lyricData.song.text_html
-      .replace(/<br\/>/g, "\n")
-      .replace(/&#x27;/g, "'");
+        const bjir = data.result;
+        let Lrk = `${gris1}${bjir}${gris1}`
+        await m.reply(Lrk);
+    } catch (e) {
+        m.reply(`Error: ${e.message}`);
+    }
+};
 
-    return {
-      status: true,
-      title: result.title,
-      album: result.album,
-      thumb: result.thumb,
-      lyrics: lyrics,
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      status: false,
-      error: "Unknown error occurred",
-    };
-  }
-}
+handler.help = ['lirik', 'lyric'];
+handler.command = ['lirik', 'lyric'];
+handler.tags = ['tools'];
 
 module.exports = handler;
-
-     
