@@ -21,6 +21,7 @@ global.sgh = 'https://github.com/Rangelofficial'
 global.web = 'https://chat.whatsapp.com/CRqd9QL3qtsFOk4T0fdbjI'
 // ≠========= SETBOT ========== //
 global.botName = "cyaaa botzz"
+global.wm = "cyaa ahh"
 global.newsletterJid = "999999@newsletter"
 global.newsletterJid1 = "99999@newsletter" // id untuk upch
 global.newsletterName = "cyaa botzz  ヅ"
